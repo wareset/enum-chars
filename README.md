@@ -54,18 +54,18 @@ yarn add enum-chars
 
 ## Usage
 
-##### enumChars(word = '', min = 1, pattern = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+#### enumChars(word = ``, min = 1, pattern = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`)
 
-##### enumChars.numbers(word = '', min = 1, pattern = '0123456789')
+#### enumChars.numbers(word = ``, min = 1, pattern = `0123456789`)
 
-##### enumChars.lowers(word = '', min = 1, pattern = 'abcdefghijklmnopqrstuvwxyz')
+#### enumChars.lowers(word = ``, min = 1, pattern = `abcdefghijklmnopqrstuvwxyz`)
 
-##### enumChars.uppers(word = '', min = 1, pattern = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+#### enumChars.uppers(word = ``, min = 1, pattern = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`)
 
 ```js
 import enumChars from 'enum-chars';
 
-let w = '';
+let w = 'abc';
 for (let i = 0; i < 20000; i++) {
   w = enumChars(w, 1, 'abcdefghijklmnopqrstuvwxyz');
   console.log([i, w]);
