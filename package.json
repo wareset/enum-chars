@@ -1,0 +1,14 @@
+{
+  "name": "enum-chars",
+  "version": "1.0.0",
+  "description": "Enumeration of characters according to template",
+  "main": "index.js",
+  "repository": "https://github.com/wareset/enum-chars.git",
+  "author": "wareset <git@wareset.com>",
+  "license": "MIT",
+  "keywords": [
+    "alphabet",
+    "characters",
+    "enumeration"
+  ]
+}
