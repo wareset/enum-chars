@@ -4,7 +4,7 @@ const uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 const _pattern = numbers + lowers + uppers;
 
-function enumChars(word, min = 1, pattern = _pattern) {
+export default function enumChars(word = '', min = 1, pattern = _pattern) {
   const count = Math.max(word.length, +min);
   if (!word.length) return ''.padEnd(count, pattern[0]);
 
@@ -22,16 +22,14 @@ function enumChars(word, min = 1, pattern = _pattern) {
   return ''.padEnd(count, pattern[0]) + pattern[0];
 }
 
-enumChars.numbers = function enumCharsNumbers(word, min = 1, a = numbers) {
+enumChars.numbers = function enumCharsNumbers(word = '', min = 1, a = numbers) {
   return enumChars(word, min, a);
 };
 
-enumChars.lowers = function enumCharsLowers(word, min = 1, a = lowers) {
+enumChars.lowers = function enumCharsLowers(word = '', min = 1, a = lowers) {
   return enumChars(word, min, a);
 };
 
-enumChars.uppers = function enumCharsUppers(word, min = 1, a = uppers) {
+enumChars.uppers = function enumCharsUppers(word = '', min = 1, a = uppers) {
   return enumChars(word, min, a);
 };
-
-module.exports = enumChars;
