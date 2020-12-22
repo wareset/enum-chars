@@ -10,31 +10,26 @@
 
 Enumeration of characters according to template.
 
-#### Attention:
-
-This function has a method `String.prototype.padEnd`.
-If it doesn't work, then you need polyfill.
-
 ### Simple example:
 
 ```js
-import enumChars from 'enum-chars';
+import enumChars from 'enum-chars'
 
-let i = 0;
-let n = '';
+let i = 0
+let n = ''
 while (n.length < 3) {
-  console.log([i, (n = enumChars(n, 2))]);
-  i++;
+  console.log([i, (n = enumChars(n, 2))])
+  i++
 }
 /* RETURNS in console.log: */
-[0, '00'];
-[1, '01'];
+;[0, '00']
+;[1, '01']
 // ...
-[593, '9z'];
-[594, '9A'];
+;[593, '9z']
+;[594, '9A']
 // ...
-[3843, 'ZZ'];
-[3844, '000'];
+;[3843, 'ZZ']
+;[3844, '000']
 // END
 ```
 
@@ -63,46 +58,46 @@ yarn add enum-chars
 #### enumChars.uppers(word = ``, min = 1, pattern = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`)
 
 ```js
-import enumChars from 'enum-chars';
+import enumChars from 'enum-chars'
 
-let w = 'abc';
+let w = 'abc'
 for (let i = 0; i < 20000; i++) {
-  w = enumChars(w, 1, 'abcdefghijklmnopqrstuvwxyz');
-  console.log([i, w]);
+  w = enumChars(w, 1, 'abcdefghijklmnopqrstuvwxyz')
+  console.log([i, w])
 }
 /* RETURNS in console.log: */
-[0, 'abd'];
-[1, 'abe'];
+;[0, 'abd']
+;[1, 'abe']
 // ...
-[22, 'abz'];
-[23, 'aca'];
+;[22, 'abz']
+;[23, 'aca']
 // ...
-[17545, 'zzy'];
-[17546, 'zzz'];
-[17547, 'aaaa'];
-[17548, 'aaab'];
+;[17545, 'zzy']
+;[17546, 'zzz']
+;[17547, 'aaaa']
+;[17548, 'aaab']
 // ...
 
 // Min word size:
-console.log(enumChars.uppers('', 10)); // AAAAAAAAAA
-console.log(enumChars.uppers('ABC', 10)); // ABDAAAAAAA
-console.log(enumChars.uppers('AAAAAAAAAA', 10)); // AAAAAAAAAB
+console.log(enumChars.uppers('', 10)) // AAAAAAAAAA
+console.log(enumChars.uppers('ABC', 10)) // ABDAAAAAAA
+console.log(enumChars.uppers('AAAAAAAAAA', 10)) // AAAAAAAAAB
 
 // Example of working with a binary system
-let n = '';
+let n = ''
 for (let i = 0; i < 257; i++) {
-  n = enumChars(n, 8, '01');
-  console.log([i, n, parseInt(n, 2)]);
+  n = enumChars(n, 8, '01')
+  console.log([i, n, parseInt(n, 2)])
 }
 /* RETURNS in console.log: */
-[0, '00000000', 0];
-[1, '00000001', 1];
-[2, '00000010', 2];
-[3, '00000011', 3];
+;[0, '00000000', 0]
+;[1, '00000001', 1]
+;[2, '00000010', 2]
+;[3, '00000011', 3]
 // ...
-[254, '11111110', 254];
-[255, '11111111', 255];
-[256, '000000000', 0];
+;[254, '11111110', 254]
+;[255, '11111111', 255]
+;[256, '000000000', 0]
 ```
 
 ## Meta
