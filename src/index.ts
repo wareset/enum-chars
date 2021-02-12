@@ -13,11 +13,13 @@ export const enumChars = ((): {
   const size = (s: string): number => s.length
   const repeat = (string: string, count: number, res = d): string => {
     count = -~count || 0
-    while (count-- > 0) res += string
+    while (--count > 0) res += string
     return res
   }
   const padEnd = (s: string, len: number, pad: string): string =>
-    !((len -= size(s)) > 0) ? s : s + repeat(pad, len / size(pad)).slice(0, len)
+    !((len -= size(s)) > 0)
+      ? s
+      : s + repeat(pad, len / size(pad) + 1).slice(0, len)
 
   const isN = (v: any): boolean => v === 0 + v
   const isS = (v: any): boolean => v === d + v
