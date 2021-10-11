@@ -4,10 +4,12 @@ export const enumChars = ((): {
   numbers: { (word: string, min?: number): string }
   lowers: { (word: string, min?: number): string }
   uppers: { (word: string, min?: number): string }
+  letters: { (word: string, min?: number): string }
 } => {
   const numbers = '0123456789'
   const lowers = 'abcdefghijklmnopqrstuvwxyz'
   const uppers = lowers.toUpperCase()
+  const letters = lowers + uppers
 
   const d = ''
   const size = (s: string): number => s.length
@@ -35,7 +37,7 @@ export const enumChars = ((): {
       (isN(min) !== isS(pattern) && +min > +pattern)
     )
       [min, pattern] = [pattern, min]
-    pattern = d + (pattern || numbers + lowers + uppers)
+    pattern = d + (pattern || lowers + numbers + uppers)
     min = +('0' + min) || 1
 
     const count = Math.max(size(word), +min)
@@ -61,7 +63,8 @@ export const enumChars = ((): {
     enumChars(word, +min, lowers)
   enumChars.uppers = (word: string, min: number): string =>
     enumChars(word, +min, uppers)
-
+  enumChars.letters = (word: string, min: number): string =>
+    enumChars(word, +min, letters)
   return enumChars
 })()
 

@@ -18,19 +18,20 @@ import enumChars from 'enum-chars'
 let i = 0
 let n = ''
 while (n.length < 3) {
-  console.log([i, (n = enumChars(n, 2))])
+  console.log([i, (n = enumChars.numbers(n, 2))])
   i++
 }
 /* RETURNS in console.log: */
 ;[0, '00']
 ;[1, '01']
 // ...
-;[593, '9z']
-;[594, '9A']
+;[9, '09']
 // ...
-;[3843, 'ZZ']
-;[3844, '000']
-// END
+
+// Min word size:
+console.log(enumChars.uppers('', 10)) // AAAAAAAAAA
+console.log(enumChars.uppers('ABC', 10)) // ABDAAAAAAA
+console.log(enumChars.uppers('AAAAAAAAAA', 10)) // AAAAAAAAAB
 ```
 
 ## Install
@@ -49,19 +50,21 @@ yarn add enum-chars
 
 ## Usage
 
-#### enumChars(word = ``, min = 1, pattern = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`)
+#### enumChars(word = '', min = 1, pattern = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
-#### enumChars.numbers(word = ``, min = 1, pattern = `0123456789`)
+#### enumChars.letters(word = '', min = 1, pattern = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
-#### enumChars.lowers(word = ``, min = 1, pattern = `abcdefghijklmnopqrstuvwxyz`)
+#### enumChars.numbers(word = '', min = 1, pattern = '0123456789')
 
-#### enumChars.uppers(word = ``, min = 1, pattern = `ABCDEFGHIJKLMNOPQRSTUVWXYZ`)
+#### enumChars.lowers(word = '', min = 1, pattern = 'abcdefghijklmnopqrstuvwxyz')
+
+#### enumChars.uppers(word = '', min = 1, pattern = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
 ```js
 import enumChars from 'enum-chars'
 
 let w = 'abc'
-for (let i = 0; i < 20000; i++) {
+for (let i = 0; i < 20000; ++i) {
   w = enumChars(w, 1, 'abcdefghijklmnopqrstuvwxyz')
   console.log([i, w])
 }
@@ -78,14 +81,9 @@ for (let i = 0; i < 20000; i++) {
 ;[17548, 'aaab']
 // ...
 
-// Min word size:
-console.log(enumChars.uppers('', 10)) // AAAAAAAAAA
-console.log(enumChars.uppers('ABC', 10)) // ABDAAAAAAA
-console.log(enumChars.uppers('AAAAAAAAAA', 10)) // AAAAAAAAAB
-
 // Example of working with a binary system
 let n = ''
-for (let i = 0; i < 257; i++) {
+for (let i = 0; i < 257; ++i) {
   n = enumChars(n, 8, '01')
   console.log([i, n, parseInt(n, 2)])
 }

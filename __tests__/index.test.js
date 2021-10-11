@@ -1,4 +1,4 @@
-const enumChars = require('../dist').default
+const enumChars = require('..').default
 
 test('enumChars:', () => {
   expect(enumChars('')).toBe('0')
