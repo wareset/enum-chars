@@ -1,8 +1,14 @@
 const enumChars = require('..').default
 
 test('enumChars:', () => {
-  expect(enumChars('')).toBe('0')
-  expect(enumChars('0')).toBe('1')
+  expect(enumChars('')).toBe('a')
+  expect(enumChars('a')).toBe('b')
+  expect(enumChars('b')).toBe('c')
+  expect(enumChars('aa')).toBe('ab')
+  expect(enumChars('aZ')).toBe('ba')
+  expect(enumChars('aZZ')).toBe('baa')
+  expect(enumChars('aZZY')).toBe('aZZZ')
+  expect(enumChars('aZZZ')).toBe('baaa')
 
   expect(enumChars('', 5, '01')).toBe('00000')
   expect(enumChars('', '01', 5)).toBe('00000')
@@ -27,6 +33,9 @@ test('enumChars:', () => {
 
   expect(enumChars.numbers('')).toBe('0')
   expect(enumChars.numbers('0')).toBe('1')
+  expect(enumChars.numbers('0', '')).toBe('1')
+  expect(enumChars.numbers('0', 5)).toBe('10000')
+  expect(enumChars.numbers('0', '5')).toBe('10000')
 
   expect(enumChars.lowers('')).toBe('a')
   expect(enumChars.lowers('a')).toBe('b')
