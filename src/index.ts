@@ -1,70 +1,61 @@
 export const enumChars = ((): {
-  (word: string, min?: number, pattern?: string): string
-  (word: string, pattern?: string, min?: number): string
-  numbers: { (word: string, min?: number): string }
-  lowers: { (word: string, min?: number): string }
-  uppers: { (word: string, min?: number): string }
-  letters: { (word: string, min?: number): string }
+  (word: string, min?: number, pattern?: string): string;
+  (word: string, pattern?: string, min?: number): string;
+  numbers: { (word: string, min?: number): string };
+  lowers: { (word: string, min?: number): string };
+  uppers: { (word: string, min?: number): string };
+  letters: { (word: string, min?: number): string };
 } => {
-  const numbers = '0123456789'
-  const lowers = 'abcdefghijklmnopqrstuvwxyz'
-  const uppers = lowers.toUpperCase()
-  const letters = lowers + uppers
+  const NUMBERS = '0123456789'
+  const LOWERS = 'abcdefghijklmnopqrstuvwxyz'
+  const UPPERS = LOWERS.toUpperCase()
+  const LETTERS = LOWERS + UPPERS
+  const ALL = LOWERS + NUMBERS + UPPERS
 
-  const d = ''
-  const size = (s: string): number => s.length
-  const repeat = (string: string, count: number, res = d): string => {
+  const repeat = (string: string, count: number, res: string): string => {
     count = -~count || 0
     while (--count > 0) res += string
     return res
   }
-  const padEnd = (s: string, len: number, pad: string): string =>
-    !((len -= size(s)) > 0)
-      ? s
-      : s + repeat(pad, len / size(pad) + 1).slice(0, len)
+  const padEnd = (s: string, len: number, pad: string): string => !((len -= s.length) > 0)
+    ? s
+    : s + repeat(pad, len / pad.length + 1, '').slice(0, len)
 
-  const isN = (v: any): boolean => v === 0 + v
-  const isS = (v: any): boolean => v === d + v
+  const isN = (v?: number | string): boolean => v === +('0' + v)
+  const isS = (v?: number | string): boolean => v === '' + v
 
   const enumChars = (
     word: string,
     min?: number | string,
     pattern?: string | number
   ): string => {
-    word += d
+    word += ''
     if (
-      (isS(min) && (isN(pattern) || !pattern)) ||
-      (isN(min) !== isS(pattern) && +min > +pattern)
-    )
+      isS(min) && (isN(pattern) || !pattern) ||
+      isN(min) !== isS(pattern) && +min! > +pattern!
+    ) {
       [min, pattern] = [pattern, min]
-    pattern = d + (pattern || lowers + numbers + uppers)
-    min = +('0' + min) || 1
+    }
+    pattern = '' + (pattern || ALL); min = +('0' + min) || 1
 
-    const count = Math.max(size(word), +min)
-    if (!size(word)) return padEnd(d, count, pattern[0])
+    const wordSize = word.length
+    if (wordSize > min) min = wordSize
+    else if (!wordSize) return padEnd('', min, pattern[0])
 
-    const wordArr = word.split(d).reverse()
-    for (const char of wordArr) {
-      word = word.slice(0, size(word) - 1)
-      const charId = +pattern.indexOf(char)
-
-      if (charId < size(pattern) - 1) {
-        word = padEnd('' + (word + pattern[charId + 1]), count, pattern[0])
-        return word
+    const patternSize1 = pattern.length - 1
+    for (let charId: number, i = wordSize; i-- > 0;) {
+      if ((charId = +pattern.indexOf(word[i])) < patternSize1) {
+        return padEnd(word.slice(0, i) + pattern[charId + 1], min, pattern[0])
       }
     }
 
-    return padEnd(d, count, pattern[0]) + pattern[0]
+    return padEnd('', min, pattern[0]) + pattern[0]
   }
 
-  enumChars.numbers = (word: string, min: number): string =>
-    enumChars(word, +min, numbers)
-  enumChars.lowers = (word: string, min: number): string =>
-    enumChars(word, +min, lowers)
-  enumChars.uppers = (word: string, min: number): string =>
-    enumChars(word, +min, uppers)
-  enumChars.letters = (word: string, min: number): string =>
-    enumChars(word, +min, letters)
+  enumChars.numbers = (word: string, min?: number): string => enumChars(word, min, NUMBERS)
+  enumChars.lowers = (word: string, min?: number): string => enumChars(word, min, LOWERS)
+  enumChars.uppers = (word: string, min?: number): string => enumChars(word, min, UPPERS)
+  enumChars.letters = (word: string, min?: number): string => enumChars(word, min, LETTERS)
   return enumChars
 })()
 
