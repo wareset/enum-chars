@@ -1,3 +1,10 @@
+/* eslint-disable */
+/*
+dester builds:
+index.ts
+*/
+/* filename: index.ts
+  timestamp: 2022-07-19T18:44:03.346Z */
 var enumChars = (() => {
   var NUMBERS = '0123456789';
   var LOWERS = 'abcdefghijklmnopqrstuvwxyz';
@@ -45,11 +52,11 @@ var enumChars = (() => {
 
   enumChars.numbers = (word, min) => enumChars(word, min, NUMBERS);
 
+  enumChars.letters = (word, min) => enumChars(word, min, LETTERS);
+
   enumChars.lowers = (word, min) => enumChars(word, min, LOWERS);
 
   enumChars.uppers = (word, min) => enumChars(word, min, UPPERS);
-
-  enumChars.letters = (word, min) => enumChars(word, min, LETTERS);
 
   return enumChars;
 })();
