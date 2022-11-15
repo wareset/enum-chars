@@ -1,35 +1,36 @@
-export const enumChars = ((): {
+export const enumChars = (function(): {
   (word: string, min?: number, pattern?: string): string;
   (word: string, pattern?: string, min?: number): string;
   numbers: { (word: string, min?: number): string };
   letters: { (word: string, min?: number): string };
   lowers: { (word: string, min?: number): string };
   uppers: { (word: string, min?: number): string };
-} => {
+  } {
   const NUMBERS = '0123456789'
   const LOWERS = 'abcdefghijklmnopqrstuvwxyz'
   const UPPERS = LOWERS.toUpperCase()
   const LETTERS = LOWERS + UPPERS
   const ALL = LOWERS + NUMBERS + UPPERS
 
-  const repeat = (string: string, count: number, res: string): string => {
+  function repeat(string: string, count: number, res: string): string {
     count = -~count || 0
     while (--count > 0) res += string
     return res
   }
-  const padEnd =
-    (s: string, len: number, pad: string): string => !((len -= s.length) > 0)
+  function padEnd(s: string, len: number, pad: string): string {
+    return !((len -= s.length) > 0)
       ? s
       : s + repeat(pad, len / pad.length + 1, '').slice(0, len)
+  }
+  
+  function isN(v?: number | string): boolean { return v === +('0' + v) }
+  function isS(v?: number | string): boolean { return v === '' + v }
 
-  const isN = (v?: number | string): boolean => v === +('0' + v)
-  const isS = (v?: number | string): boolean => v === '' + v
-
-  const enumChars = (
+  function enumChars(
     word: string,
     min?: number | string,
     pattern?: string | number
-  ): string => {
+  ): string {
     word += ''
     if (
       isS(min) && (isN(pattern) || !pattern) ||
@@ -54,13 +55,13 @@ export const enumChars = ((): {
   }
 
   enumChars.numbers =
-    (word: string, min?: number): string => enumChars(word, min, NUMBERS)
+    function(word: string, min?: number): string { return enumChars(word, min, NUMBERS) }
   enumChars.letters =
-    (word: string, min?: number): string => enumChars(word, min, LETTERS)
+    function(word: string, min?: number): string { return enumChars(word, min, LETTERS) }
   enumChars.lowers =
-    (word: string, min?: number): string => enumChars(word, min, LOWERS)
+    function(word: string, min?: number): string { return enumChars(word, min, LOWERS) }
   enumChars.uppers =
-    (word: string, min?: number): string => enumChars(word, min, UPPERS)
+    function(word: string, min?: number): string { return enumChars(word, min, UPPERS) }
   return enumChars
 })()
 

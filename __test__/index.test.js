@@ -1,6 +1,6 @@
 const enumChars = require('..').default
 
-test('enumChars:', () => {
+test('enumChars:', function() {
   expect(enumChars('')).toBe('a')
   expect(enumChars('a')).toBe('b')
   expect(enumChars('b')).toBe('c')
