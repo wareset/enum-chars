@@ -1,6 +1,6 @@
 {
   "name": "enum-chars",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Enumeration of characters according to template",
   "keywords": [
     "enumeration",
@@ -43,9 +43,7 @@
   },
   "devDependencies": {
     "dester": "1.0.x",
-    "jest": "^29.3.1"
-  },
-  "peerDependencies": {
-    "typescript": "5.x"
+    "jest": "^29.3.1",
+    "typescript": "*"
   }
 }
